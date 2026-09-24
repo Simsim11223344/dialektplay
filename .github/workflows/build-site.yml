@@ -4,6 +4,7 @@ on:
     paths:
       - "scripts/upgrade_site.py"
       - "scripts/generate_audio.py"
+      - "scripts/finish_site.py"
   workflow_dispatch:
 permissions:
   contents: write
@@ -17,13 +18,17 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y espeak ffmpeg
       - name: Upgrade site
         run: python3 scripts/upgrade_site.py
+      - name: Finish local audio compare
+        run: python3 scripts/finish_site.py
       - name: Decode and generate local MP3 clips
         run: python3 scripts/generate_audio.py && python3 generate_audio_payload.py
       - name: Commit generated site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html audio/ generate_audio_payload.py
+          git add index.html audio/
+          rm -f generate_audio_payload.py
+          git add -u
           git diff --cached --quiet && exit 0
           git commit -m "Add local DialektPlay audio and profile XP system"
           git push
