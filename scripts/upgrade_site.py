@@ -1,6 +1,8 @@
 from pathlib import Path
 p=Path('index.html')
 s=p.read_text(encoding='utf-8')
+if 'const DP_AUDIO' in s:
+    raise SystemExit(0)
 patch=r'''
 <style>
 .audio{width:100%;margin:14px 0}.shop{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.shopItem{padding:15px;border:1px solid var(--line);border-radius:15px;background:#07172a}.shopItem.owned{border-color:#2071a8}.locked{opacity:.55}.tag{font-size:11px;color:#78cdfc}.profilePreview{padding:25px;border-radius:18px;border:1px solid var(--line);min-height:150px;display:flex;align-items:center;gap:18px;background:#07172a}.bigAvatar{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;font-size:30px;font-weight:1000;background:linear-gradient(135deg,var(--blue),#164f9d)}.font-neon{font-family:Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif}.font-mono{font-family:ui-monospace,SFMono-Regular,monospace}.bg-space{background:radial-gradient(circle at 70% 20%,#3153a5,#080b20 45%,#02040b)}.bg-grid{background-image:linear-gradient(#1b4165 1px,transparent 1px),linear-gradient(90deg,#1b4165 1px,transparent 1px);background-size:22px 22px}.bg-purple{background:radial-gradient(circle at 20% 20%,#5b2ca0,#11132e 45%,#05050c)}
