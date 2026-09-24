@@ -1,3 +1,4 @@
+# GitHub Pages deployment for DialektPlay
 name: Deploy DialektPlay to GitHub Pages
 on:
   push:
